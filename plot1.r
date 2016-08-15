@@ -1,0 +1,8 @@
+tf <- tempfile()
+td <- tempdir()
+download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip", tf)
+file.names <- unzip(tf, exdir = td)
+data <- read.table(file.names, header = TRUE, sep = ";")
+dateddata <- subset(data, data$Date == "1/2/2007" | data$Date == "2/2/2007")
+dateddata$Global_active_power <- as.numeric(dateddata$Global_active_power)
+hist(dateddata$Global_active_power/500, col = "red", xlab = "Global Active Power (kilowatts)", main = "Global Active Power")
